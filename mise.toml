@@ -1,0 +1,4 @@
+[tools]
+coreutils = "latest"
+uv = "latest"
+
