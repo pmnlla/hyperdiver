@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#MISE description="Set the patchset"
+export QUILT_PATCHSET=$i

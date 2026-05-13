@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 #MISE description="Make a new patch. Pass the file name as the first argument."
-export QUILT_PATCHES=sys/patches  
+if [ "$QUILT_PATCHSET" = "" ]; then
+    echo "Error: No patchset specified. Use 'mise run set_patchset [name]' to set the patchset."
+    exit 1
+fi
+export QUILT_PATCHES=sys/patches/$QUILT_PATCHSET
 export QUILT_DIFF_OPTS="-p"
 quilt new $1.patch
-echo "Done! Use 'quilt add <file>' to add files to the patch. Run "mise run seal" to finish the patch."
+echo "Done! Use 'quilt add <file>' to add files to the patch. Run 'mise run seal' to finish the patch."

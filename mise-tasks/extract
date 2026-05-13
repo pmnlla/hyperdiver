@@ -3,3 +3,4 @@
 mkdir -p build/rootfs
 uv run tooling/extract.py 2104 firmware.bin rootfs/
 unsquashfs -d rootfs build/rootfs/Squashfs_rootfs_1
+rm -rf build/rootfs

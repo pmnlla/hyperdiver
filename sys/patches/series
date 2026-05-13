@@ -1,4 +1,4 @@
 telnet.patch
 pwd.patch
-.patch
-password.patch
+set_system_info.patch
+entware.patch

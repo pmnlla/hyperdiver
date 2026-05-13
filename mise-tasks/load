@@ -1,10 +1,19 @@
 #!/usr/bin/env bash
 #MISE description="Load a patch. Pass the file name as the first argument."
-if $QUILT_PATCHSET = ""; then
-    echo "Error: No patchset specified. Use "mise run set_patchset <patchset_name>" to set the patchset."
+if [ "$QUILT_PATCHSET" = "" ]; then
+    echo "Error: No patchset specified. Use 'mise run set_patchset [name]' to set the patchset."
     exit 1
 fi
-export QUILT_PATCHES=sys/patches/$QUILT_PATCHSET
+export QUILT_PATCHES="$(pwd)/sys/patches/$QUILT_PATCHSET"
 export QUILT_DIFF_OPTS="-p"
-quilt push $1.patch
+
+cd "$(pwd)" || exit 1
+
+# Verify the series file exists before calling quilt
+if [ ! -f "$QUILT_PATCHES/series" ]; then
+  echo "ERROR: Series file not found at $QUILT_PATCHES/series"
+  exit 1
+fi
+
+quilt push -a
 echo "Done! Patch loaded."

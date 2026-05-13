@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 #MISE description="Seal a patch."
-export QUILT_PATCHES=sys/patches  
+if [ "$QUILT_PATCHSET" = "" ]; then
+    echo "Error: No patchset specified. Use 'mise run set_patchset [name]' to set the patchset."
+    exit 1
+fi
+export QUILT_PATCHES=sys/patches/$QUILT_PATCHSET 
 export QUILT_DIFF_OPTS="-p"
 quilt header -e
 quilt refresh
 quilt pop -a
-echo "Done! Patch is sealed. Rootfs has been reverted to stock - use "quilt push -a" to apply all."
+echo "Done! Patch is sealed. Rootfs has been reverted to stock - use 'quilt push -a' to apply all."
