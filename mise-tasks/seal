@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#MISE description="Seal a patch."
+export QUILT_PATCHES=sys/patches  
+export QUILT_DIFF_OPTS="-p"
+quilt header -e
+quilt refresh
+quilt pop -a
+echo "Done! Patch is sealed. Rootfs has been reverted to stock - use "quilt push -a" to apply all."

@@ -1,0 +1,14 @@
+Run telnetd as a busybox process instead of as a telnetd process; gets around raysharp_dvr.bin killing telnetd.
+Index: hyperdiver/rootfs/etc/init.d/S21aconfig
+===================================================================
+--- hyperdiver.orig/rootfs/etc/init.d/S21aconfig
++++ hyperdiver/rootfs/etc/init.d/S21aconfig
+@@ -12,7 +12,7 @@ echo "rootfs compile user:tuzuguo time:2
+ ifconfig lo 127.0.0.1
+ ifconfig eth0 192.168.1.99
+ #  mount -t nfs -o nolock 192.168.1.63:/home/admin1/work/hi/3531/nfs /home/
+-telnetd &
++busybox telnetd & # thanks stacksmashing for this hack!
+   cd /moudle/ko_hi3521a/
+ insmod extdrv/rs_gpio.ko
+ ./load3521a -i
