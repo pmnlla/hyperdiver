@@ -1,4 +1,6 @@
 build/*
 rootfs/*
 accessory/*
-.pc/*
+.pc/
+.claude/
+spam/
