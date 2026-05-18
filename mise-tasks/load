@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 #MISE description="Load a patch. Pass the file name as the first argument."
+QUILT_ENV_DIR=.pc
+QUILT_PATCHSET=$(cat $QUILT_ENV_DIR/.hd_patchset)
 if [ "$QUILT_PATCHSET" = "" ]; then
-    echo "Error: No patchset specified. Use 'mise run set_patchset [name]' to set the patchset."
+    echo "Error: No patchset specified. Use 'mise run set_patchset [name]' to set the patchset.\n Wiping $QUILT_ENV_DIR directory."
     exit 1
 fi
 export QUILT_PATCHES="$(pwd)/sys/patches/$QUILT_PATCHSET"
