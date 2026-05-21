@@ -17,13 +17,14 @@ parts_2104 = [
     # | 15551516      0xED4C1C        JPEG image data, JFIF standard 1.02
     # | 15587589      0xEDD905        Squashfs filesystem, little endian, version 4.0, compression:xz, size: 4758152 bytes, 331 inodes, blocksize: 131072 bytes, created: 2019-05-20 08:13:06
     #
+    FirmwarePart("RSUP_Header", 0x0, 0x2BD24),
     FirmwarePart("CRC_table_A", 0x2BD24, 0x2184),
     FirmwarePart("CRC_table_B", 0x2DEA8, 0x1033C),
     FirmwarePart("uImage_header", 0x3E1E4, 0x40),
     FirmwarePart("Linux_kernel_zImage", 0x3E224, 0x1F58),
     FirmwarePart("LZMA_misc_we_dont_care", 0x4017C, 0x253AA0),
     FirmwarePart("Squashfs_rootfs_1", 0x293C1C, 0x2EA000),
-    FirmwarePart("Squashfs_rootfs_2", 0x57DC1C, 0xA57000),
-    FirmwarePart("JPEG_image_ignore_this", 0xED4C1C, 0x8CD9),
+    FirmwarePart("Squashfs_rootfs_2", 0x57DC1C, 0x957000),
+    FirmwarePart("JPEG_image_ignore_this", 0xED4C1C, 0x8CE9),
     FirmwarePart("Squashfs_rootfs_3", 0xEDD905, 0x1367905 - 0xEDD905),
 ]

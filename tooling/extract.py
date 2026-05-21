@@ -9,7 +9,7 @@ def extract_parts(firmware_path, output_dir):
         return
     with open(firmware_path, "rb") as f:
         for part in parts:
-            outfile = open("build/" + output_dir + "/" + part.name, "wb")
+            outfile = open(output_dir + "/" + part.name, "wb")
             f.seek(part.offset)
             data = f.read(part.size)
             outfile.write(data)

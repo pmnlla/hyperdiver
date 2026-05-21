@@ -31,10 +31,3 @@ Index: hyperdiver/rootfs/etc/profile
 +echo "${BLUE}Hyperdiver ${VERSION}"
 +echo "${MAGENTA}MAC: ${MAC}"
 +echo "${RED}Roll the katamari.${NORMAL}"
-Index: hyperdiver/rootfs/etc/hd/version
-===================================================================
---- /dev/null
-+++ hyperdiver/rootfs/etc/hd/version
-@@ -0,0 +1 @@
-+0
-\ No newline at end of file
