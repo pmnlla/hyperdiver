@@ -2,7 +2,8 @@
 #MISE description="Firmware extraction task for the LHA2104/8/8LC. Only supports 2104 right now :()"
 mkdir -p build/roots
 uv run tooling/extract.py 2104 firmware.bin build/roots
-if ![$1 == "dont-unsquash-the-filesystem"]; then
-    unsquashfs -d rootfs build/roots/Squashfs_rootfs_1
-done
+if [ "$1" != "dont-unsquash-the-filesystem" ]; then
+    ROOTFSIMAGE=$(ls build/roots/*_rootfs | head -n1); 
+    unsquashfs -d rootfs -f $ROOTFSIMAGE;
+fi
 #rm -rf build/rootfs

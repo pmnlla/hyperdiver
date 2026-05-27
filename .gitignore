@@ -4,3 +4,4 @@ accessory/*
 .pc/
 .claude/
 spam/
+*/__pycache__/*
