@@ -1,0 +1,18 @@
+Copy /opt to a read/write portion of the disk; mount it on boot.
+Index: hyperdiver/rootfs/etc/init.d/S21aconfig
+===================================================================
+--- hyperdiver.orig/rootfs/etc/init.d/S21aconfig
++++ hyperdiver/rootfs/etc/init.d/S21aconfig
+@@ -105,6 +105,12 @@ cp /root/passwd- /etc/ppp/passwd-
+ cp /etc/Wireless/MT7601USTA.dat /etc/Wireless/RT2870STA/
+ cp /etc/Wireless/RT2870STA.dat /etc/Wireless/RT2870STA/
+ 	
++# on the topic of mounts.....
++if [ ! -f "/log/0/.firstboot_complete" ]; then
++	cp /opt /log/0
++fi
++mount /log/0/opt /opt
++
+ SerialSwitch
+ if [ "$?" = "1" ];then 
+ 	echo "open Serial!"	

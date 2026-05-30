@@ -1,4 +1,4 @@
 [tools]
 coreutils = "latest"
 uv = "latest"
-
+yq = "latest"

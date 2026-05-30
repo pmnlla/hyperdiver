@@ -1,5 +1,6 @@
 BLOCKSIZE=65536
 COMPRESSION="xz"
+VERSION=$(git describe --always --dirty)
 #ROOTS=("RSUP_Header" "CRC_table_A" "CRC_table_B" "uImage_header" "Linux_kernel_zImage" "LZMA_misc_we_dont_care" "Squashfs_rootfs_1" "Squashfs_rootfs_2" "JPEG_image_ignore_this" "Squashfs_rootfs_3")
 #ROOTS_POST=("RSUP_Header" "CRC_table_A" "CRC_table_B" "uImage_header" "Linux_kernel_zImage" "LZMA_misc_we_dont_care" "../new-root.squashfs" "Squashfs_rootfs_2" "JPEG_image_ignore_this" "Squashfs_rootfs_3")
 
@@ -22,10 +23,20 @@ prereq() {
     fi
 }
 
+include() {
+    yq ".inclusion[] | [.src, .dest] | @tsv " ../sys/inclusions.yaml | while IFS=$'\t' read -r src dest; do
+        cp ../$src rootfs$dest
+        echo "Copied $src to $dest"
+    done
+}
+
 pack_squash() {
     rm -f rootfs;
     rm roots/4_Squashfs_rootfs
-    ln -s ../rootfs .;
+    cp -r ../rootfs .;
+    echo $VERSION > rootfs/etc/hd/version
+    echo "Packing inclusions..."
+    include
     echo "Creating root squashfs...."
     mksquashfs rootfs/. roots/4_Squashfs_rootfs -comp $COMPRESSION -b $BLOCKSIZE
 }

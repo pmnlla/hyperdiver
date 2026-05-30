@@ -12,4 +12,3 @@ class PartitionTableEntry:
     
     def calculateRaw(self):
         
-
