@@ -5,3 +5,4 @@ accessory/*
 .claude/
 spam/
 */__pycache__/*
+*~

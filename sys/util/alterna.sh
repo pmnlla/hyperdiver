@@ -7,7 +7,7 @@ setup_opkg() {
     chmod +x /tmp/entware-setup-generic.sh
     /tmp/entware-setup-generic.sh
     for i in $DEFAULT_PKG; do
-        opkg install $i
+        /opt/bin/opkg install $i
     done
     chmod +x /opt/etcinit.d/rc.unslung
     /opt/etc/init.d/rc.unslung start
@@ -31,7 +31,7 @@ sys_configure() {
 
 }
 
-if [ ! -f "/log/0/.firstboot_complete" ] && [ $1 = "init"]; then
+if [ ! -f "/log/0/.firstboot_complete" ] && [ $1 = "init" ]; then
     echo "Setting up package management..."
     setup_opkg
 
@@ -43,7 +43,7 @@ if [ ! -f "/log/0/.firstboot_complete" ] && [ $1 = "init"]; then
 fi
 
 if [ "$1" = "passwd" ]; then
-    if [ ! "$2" = ""]; then
+    if [ ! "$2" = "" ]; then
         PWD=$(mkpasswd -m md5 $2)
         echo "root:$PWD:0:0::/root:/bin/sh" > /opt/etc/passwd
         ln -s /opt/etc/passwd /etc/passwd

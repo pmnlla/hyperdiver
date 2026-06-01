@@ -1,4 +1,4 @@
-firstboot.patch
+telnetd.patch
 mount_opt.patch
 entware.patch
 pwd.patch

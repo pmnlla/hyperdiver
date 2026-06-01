@@ -9,7 +9,7 @@ Index: hyperdiver/rootfs/etc/init.d/S21aconfig
  	
 +# on the topic of mounts.....
 +if [ ! -f "/log/0/.firstboot_complete" ]; then
-+	cp /opt /log/0
++	cp -r /opt /log/0
 +fi
 +mount /log/0/opt /opt
 +

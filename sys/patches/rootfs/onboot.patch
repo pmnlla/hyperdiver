@@ -1,0 +1,13 @@
+add alterna init onboot
+Index: hyperdiver/rootfs/etc/init.d/S21aconfig
+===================================================================
+--- hyperdiver.orig/rootfs/etc/init.d/S21aconfig
++++ hyperdiver/rootfs/etc/init.d/S21aconfig
+@@ -118,5 +118,8 @@ cd /mnt
+ mount -t squashfs /dev/mtdblock4 /plugs
+ boa &
+ 
++sh /bin/alterna init
++
+   
+ 

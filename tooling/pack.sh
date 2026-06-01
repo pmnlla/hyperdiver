@@ -1,8 +1,6 @@
 BLOCKSIZE=65536
 COMPRESSION="xz"
 VERSION=$(git describe --always --dirty)
-#ROOTS=("RSUP_Header" "CRC_table_A" "CRC_table_B" "uImage_header" "Linux_kernel_zImage" "LZMA_misc_we_dont_care" "Squashfs_rootfs_1" "Squashfs_rootfs_2" "JPEG_image_ignore_this" "Squashfs_rootfs_3")
-#ROOTS_POST=("RSUP_Header" "CRC_table_A" "CRC_table_B" "uImage_header" "Linux_kernel_zImage" "LZMA_misc_we_dont_care" "../new-root.squashfs" "Squashfs_rootfs_2" "JPEG_image_ignore_this" "Squashfs_rootfs_3")
 
 prereq() {
     for file in "${ROOTS[@]}"; do
@@ -31,7 +29,7 @@ include() {
 }
 
 pack_squash() {
-    rm -f rootfs;
+    rm -rf rootfs;
     rm roots/4_Squashfs_rootfs
     cp -r ../rootfs .;
     echo $VERSION > rootfs/etc/hd/version
@@ -43,7 +41,7 @@ pack_squash() {
 
 mkdir -p build;
 cd build;
-prereq
+prereq 
 
 if [ "$1" = "squash" ]; then
     pack_squash
