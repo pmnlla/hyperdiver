@@ -21,14 +21,14 @@ parts_2104 = [
     FirmwarePart("6_bootlogo", 0xED4C1C, 0x8CE9),
     FirmwarePart("7_Squashfs_www", 0xEDD905, 0x48a000),
 ]
-parts_2104 = [
+parts_2108 = [
     # instead of binwalk, i went ahead and worked on decoding the inbuilt partition table in the RSUp header, following the magic string @ 0x00 
     FirmwarePart("0_RSUP_Header", 0x0, 0x398),
     FirmwarePart("1_cmdline", 0x398, 0x200),
-    FirmwarePart("2_binary_1", 0x598, 0x3dc4c),
-    FirmwarePart("3_kernel", 0x3E1E4, 0x255a38),
-    FirmwarePart("4_Squashfs_rootfs", 0x293C1C, 0x2EA000),
-    FirmwarePart("5_Squashfs_app", 0x57DC1C, 0x957000),
-    FirmwarePart("6_bootlogo", 0xED4C1C, 0x8CE9),
-    FirmwarePart("7_Squashfs_www", 0xEDD905, 0x48a000),
+    FirmwarePart("2_binary_1", 0x598, 0x3E774),
+    FirmwarePart("3_kernel", 0x03ED0C, 0x255A38),
+    FirmwarePart("4_Squashfs_rootfs", 0x294744, 0x2EA000),
+    FirmwarePart("5_Squashfs_app", 0x57E744, 0x957000),
+    FirmwarePart("6_bootlogo", 0xEA9744, 0x8CE9),
+    FirmwarePart("7_Squashfs_www", 0xEB242D, 0x48a000),
 ]
