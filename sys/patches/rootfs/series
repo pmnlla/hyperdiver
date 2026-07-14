@@ -3,3 +3,4 @@ mount_opt.patch
 entware.patch
 pwd.patch
 set_system_info.patch
+no_display_ui.patch

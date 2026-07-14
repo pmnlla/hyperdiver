@@ -1,0 +1,12 @@
+Disable launching the raysharp UI process
+Index: hyperdiver/appfs/start-qt-gui.sh
+===================================================================
+--- hyperdiver.orig/appfs/start-qt-gui.sh
++++ hyperdiver/appfs/start-qt-gui.sh
+@@ -4,5 +4,5 @@ killall raysharp-hdvr-ui
+ 
+ export LD_LIBRARY_PATH=$PWD/lib
+ 
+-./raysharp-hdvr-ui &
++# ./raysharp-hdvr-ui &
+ 

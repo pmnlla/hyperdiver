@@ -1,17 +1,4 @@
 Add system info to /etc/profile, set the hostname, show version.
-Index: hyperdiver/rootfs/etc/init.d/S21aconfig
-===================================================================
---- hyperdiver.orig/rootfs/etc/init.d/S21aconfig
-+++ hyperdiver/rootfs/etc/init.d/S21aconfig
-@@ -9,6 +9,8 @@ echo 20 > /proc/sys/vm/dirty_ratio
- echo 200 > /proc/sys/vm/vfs_cache_pressure
-   
- echo "rootfs compile user:tuzuguo time:2018-08-15 10:37:05"
-+macaddr=$(cat /sys/class/net/eth0/address | tr -d ':')
-+hostname hyperdiver-$macaddr
- ifconfig lo 127.0.0.1
- ifconfig eth0 192.168.1.99
- #  mount -t nfs -o nolock 192.168.1.63:/home/admin1/work/hi/3531/nfs /home/
 Index: hyperdiver/rootfs/etc/profile
 ===================================================================
 --- hyperdiver.orig/rootfs/etc/profile
@@ -30,7 +17,6 @@ Index: hyperdiver/rootfs/etc/profile
 +echo "${GREEN}Welcome to HiLinux."
 +echo "${BLUE}Hyperdiver ${VERSION}"
 +echo "${MAGENTA}MAC: ${MAC}"
-+echo "${RED}Roll the katamari.${NORMAL}"
 Index: hyperdiver/rootfs/etc/hd/version
 ===================================================================
 --- /dev/null
@@ -38,3 +24,15 @@ Index: hyperdiver/rootfs/etc/hd/version
 @@ -0,0 +1 @@
 +0
 \ No newline at end of file
+Index: hyperdiver/rootfs/etc/init.d/S80network
+===================================================================
+--- hyperdiver.orig/rootfs/etc/init.d/S80network
++++ hyperdiver/rootfs/etc/init.d/S80network
+@@ -45,4 +45,6 @@ else
+ fi
+ 
+ ifconfig lo 127.0.0.1
+-
++macaddr=$(cat /sys/class/net/eth0/address | tr -d ':')
++hostname hyperdiver-$macaddr
++echo "Mac Address: $macaddor" | sudo tee /dev/kmsg

@@ -5,5 +5,7 @@ uv run tooling/extract.py 2104 firmware.bin build/roots
 if [ "$1" != "dont-unsquash-the-filesystem" ]; then
     ROOTFSIMAGE=$(ls build/roots/*_rootfs | head -n1); 
     unsquashfs -d rootfs -f $ROOTFSIMAGE;
+    APPFSIMAGE=$(ls build/roots/*_app | head -n1);\
+    unsquashfs -d appfs -f $APPFSIMAGE
 fi
 #rm -rf build/rootfs

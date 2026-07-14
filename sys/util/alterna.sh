@@ -7,7 +7,7 @@ setup_opkg() {
     chmod +x /tmp/entware-setup-generic.sh
     /tmp/entware-setup-generic.sh
     for i in $DEFAULT_PKG; do
-        /opt/bin/opkg install $i
+        /opt/bin/opkg install $i # we do this to avoid the issue of 1 bad package taking down the rest
     done
     chmod +x /opt/etcinit.d/rc.unslung
     /opt/etc/init.d/rc.unslung start
@@ -32,6 +32,7 @@ sys_configure() {
 }
 
 if [ ! -f "/log/0/.firstboot_complete" ] && [ $1 = "init" ]; then
+    echo "Firstboot incomplete - defaulting to firstboot setup."
     echo "Setting up package management..."
     setup_opkg
 
