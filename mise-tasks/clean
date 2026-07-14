@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#MISE description="Cleanup! Cleanup! Everybody, do your share!"
+rm -r rootfs/ appfs/ build/ .pc/

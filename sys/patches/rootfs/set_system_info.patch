@@ -3,7 +3,7 @@ Index: hyperdiver/rootfs/etc/profile
 ===================================================================
 --- hyperdiver.orig/rootfs/etc/profile
 +++ hyperdiver/rootfs/etc/profile
-@@ -32,7 +32,12 @@ MAGENTA="[1;35m"
+@@ -32,7 +32,11 @@ MAGENTA="[1;35m"
  CYAN="[1;36m"
  WHITE="[1;37m"
  
@@ -28,11 +28,11 @@ Index: hyperdiver/rootfs/etc/init.d/S80network
 ===================================================================
 --- hyperdiver.orig/rootfs/etc/init.d/S80network
 +++ hyperdiver/rootfs/etc/init.d/S80network
-@@ -45,4 +45,6 @@ else
+@@ -44,5 +44,4 @@ else
+ 	[ x$gateway != x- ] && route add default gw $gateway
  fi
  
- ifconfig lo 127.0.0.1
+-ifconfig lo 127.0.0.1
 -
-+macaddr=$(cat /sys/class/net/eth0/address | tr -d ':')
-+hostname hyperdiver-$macaddr
-+echo "Mac Address: $macaddor" | sudo tee /dev/kmsg
++ifconfig lo 127.0.0.1
+\ No newline at end of file

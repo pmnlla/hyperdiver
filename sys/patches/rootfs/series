@@ -2,5 +2,5 @@ telnetd.patch
 mount_opt.patch
 entware.patch
 pwd.patch
+onboot.patch
 set_system_info.patch
-no_display_ui.patch

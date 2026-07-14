@@ -14,8 +14,8 @@ setup_opkg() {
 }
 
 redo_opt() {
-    echo "Overriding /opt with a bind mount to /log/0/hd/opt..."
-    mount --bind /log/0/hd/opt /opt
+    echo "Overriding /opt with a bind mount to /log/0/opt..."
+    mount --bind /log/0/opt /opt
 }
 
 start_telnet() {

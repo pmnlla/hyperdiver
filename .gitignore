@@ -1,8 +1,10 @@
 build/*
 rootfs/*
 accessory/*
+appfs/*
 .pc/
 .claude/
 spam/
 */__pycache__/*
 *~
+LHA*

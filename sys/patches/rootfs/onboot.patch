@@ -3,11 +3,40 @@ Index: hyperdiver/rootfs/etc/init.d/S21aconfig
 ===================================================================
 --- hyperdiver.orig/rootfs/etc/init.d/S21aconfig
 +++ hyperdiver/rootfs/etc/init.d/S21aconfig
-@@ -118,5 +118,8 @@ cd /mnt
+@@ -104,13 +104,6 @@ cp /root/passwd /etc/ppp/passwd
+ cp /root/passwd- /etc/ppp/passwd-
+ cp /etc/Wireless/MT7601USTA.dat /etc/Wireless/RT2870STA/
+ cp /etc/Wireless/RT2870STA.dat /etc/Wireless/RT2870STA/
+-	
+-# on the topic of mounts.....
+-while ! mount | grep -q ' /log/0 '; do sleep 1; done # wait for rsSystemServer to mount /log/0
+-if [ ! -f "/log/0/.firstboot_complete" ]; then
+-	cp -r /opt /log/0
+-fi
+-mount /log/0/opt /opt
+ 
+ SerialSwitch
+ if [ "$?" = "1" ];then 
+@@ -125,5 +118,20 @@ cd /mnt
  mount -t squashfs /dev/mtdblock4 /plugs
  boa &
  
-+sh /bin/alterna init
+-  
++# on the topic of mounts.....
++while ! mount | grep -q ' /log/0 '; do sleep 1; done # wait for rsSystemServer to mount /log/0. we don't want to proceed without it.
++if [ ! -f "/log/0/.firstboot_complete" ]; then
++	cp -r /opt /log/0
++fi
++mount /log/0/opt /opt
 +
-   
++# raysharp_dvr handles networking - wait for it to bring up MAC
++i=0
++while ! cat /sys/class/net/eth0/address | grep -qi '^00:40:7f:'; do
++	[ $i -ge 30 ] && break ## make sure a missing mac cant break boot
++	sleep 1; i=$((i+1))
++done
++macaddr=$(cat /sys/class/net/eth0/address | tr -d ':')
++hostname hyperdiver-$macaddr
  
++sh /bin/alterna
+\ No newline at end of file
