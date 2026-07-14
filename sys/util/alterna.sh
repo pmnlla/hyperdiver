@@ -3,7 +3,7 @@
 DEFAULT_PKG="dropbear curl"
 
 setup_opkg() {
-    wget https://bin.entware.net/armv7sf-k3.2/installer/generic.sh -O /tmp/entware-setup-generic.sh
+    wget http://bin.entware.net/armv7sf-k3.2/installer/generic.sh -O /tmp/entware-setup-generic.sh
     chmod +x /tmp/entware-setup-generic.sh
     /tmp/entware-setup-generic.sh
     for i in $DEFAULT_PKG; do
@@ -28,7 +28,6 @@ sys_configure() {
         cp /opt/etc/passwd /etc/passwd
     fi
     ln -s /opt/root/.ssh /root/.ssh
-
 }
 
 if [ ! -f "/log/0/.firstboot_complete" ] && [ $1 = "init" ]; then
@@ -41,6 +40,11 @@ if [ ! -f "/log/0/.firstboot_complete" ] && [ $1 = "init" ]; then
 
     touch /log/0/.firstboot_complete
     echo "Firstboot setup complete."
+
+    echo " === CityBlock Init"
+    /opt/bin/opkg install tailscale
+    cp /etc/init.d/S91tailscale_userspace_tun /opt/etc/init.d/
+    sh /opt/etc/init.d/S91tailscale_userspace_tun start
 fi
 
 if [ "$1" = "passwd" ]; then
