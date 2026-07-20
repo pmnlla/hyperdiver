@@ -38,5 +38,5 @@ Index: hyperdiver/rootfs/etc/init.d/S21aconfig
 +macaddr=$(cat /sys/class/net/eth0/address | tr -d ':')
 +hostname hyperdiver-$macaddr
  
-+sh /bin/alterna
++sh /bin/alterna init &
 \ No newline at end of file

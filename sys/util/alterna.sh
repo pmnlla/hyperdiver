@@ -9,7 +9,7 @@ setup_opkg() {
     for i in $DEFAULT_PKG; do
         /opt/bin/opkg install $i # we do this to avoid the issue of 1 bad package taking down the rest
     done
-    chmod +x /opt/etcinit.d/rc.unslung
+    chmod +x /opt/etc/init.d/rc.unslung
     /opt/etc/init.d/rc.unslung start
 }
 
@@ -32,6 +32,17 @@ sys_configure() {
 
 if [ ! -f "/log/0/.firstboot_complete" ] && [ $1 = "init" ]; then
     echo "Firstboot incomplete - defaulting to firstboot setup."
+
+    echo "Waiting for network..."
+    while ! ping -c1 -W1 1.1.1.1 >/dev/null 2>&1; do
+        sleep 1
+        elapsed=$((elapsed + 1))
+        if [ "$elapsed" -ge "$timeout" ]; then
+            echo "No network after ${timeout}s" >&2
+            return 1
+        fi
+    done
+
     echo "Setting up package management..."
     setup_opkg
 
@@ -45,13 +56,20 @@ if [ ! -f "/log/0/.firstboot_complete" ] && [ $1 = "init" ]; then
     /opt/bin/opkg install tailscale
     cp /etc/init.d/S91tailscale_userspace_tun /opt/etc/init.d/
     sh /opt/etc/init.d/S91tailscale_userspace_tun start
+elif [ $1 = "init" ]; then
+    echo "Password setup..."
+    if [ -f "/opt/etc/passwd" ]; then
+        mount --bind /opt/etc/passwd /etc/passwd
+    fi
+    echo "Running entware init scripts"
+    sh /opt/etc/init.d/rc.unslung start
 fi
 
 if [ "$1" = "passwd" ]; then
     if [ ! "$2" = "" ]; then
         PWD=$(mkpasswd -m md5 $2)
         echo "root:$PWD:0:0::/root:/bin/sh" > /opt/etc/passwd
-        ln -s /opt/etc/passwd /etc/passwd
+        mount --bind /opt/etc/passwd /etc/passwd
     else
         echo "Provide a password!"
     fi
