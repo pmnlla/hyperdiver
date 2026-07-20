@@ -1,12 +1,14 @@
 import sys
 
-from parts import parts_2104
+from parts import parts_2104, parts_2108
 def extract_parts(firmware_path, output_dir):
     if sys.argv[1] == "2104":
         parts = parts_2104
+    elif sys.argv[1] == "2108":
+        parts = parts_2108
     else:
         print("Unsupported firmware version")
-        return
+        exit(1)
     with open(firmware_path, "rb") as f:
         for part in parts:
             outfile = open(output_dir + "/" + part.name, "wb")

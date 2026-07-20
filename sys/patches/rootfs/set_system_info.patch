@@ -16,7 +16,7 @@ Index: hyperdiver/rootfs/etc/profile
  
 +echo "${GREEN}Welcome to HiLinux."
 +echo "${BLUE}Hyperdiver ${VERSION}"
-+echo "${MAGENTA}MAC: ${MAC}"
++echo "${MAGENTA}MAC: ${MAC}${NORMAL}"
 Index: hyperdiver/rootfs/etc/hd/version
 ===================================================================
 --- /dev/null

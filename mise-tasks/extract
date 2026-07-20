@@ -1,8 +1,28 @@
 #!/usr/bin/env bash
 #MISE description="Firmware extraction task for the LHA2104/8/8LC. Only supports 2104 right now :()"
 mkdir -p build/roots
-uv run tooling/extract.py 2104 firmware.bin build/roots
-if [ "$1" != "dont-unsquash-the-filesystem" ]; then
+
+if [[ -z "$1"  ]]; then
+    echo "Provide a blob!";
+    exit 1
+fi;
+
+BLOB_TARGET=$(xxd -p -s 0x10 -l 0xA "$1")
+if [ $BLOB_TARGET = "44313130384e522d3332" ]; then
+    TARGET_MODEL=2108;
+    echo "Found LHA2108/LC!!";
+elif [ $BLOB_TARGET = "44313130344e522d3332" ]; then
+    TARGET_MODEL=2104;
+    echo "Found LHA2104!!";
+fi
+
+if [[ -z $TARGET_MODEL ]]; then
+    echo "Cannot determine target!";
+    exit 1;
+fi
+
+uv run tooling/extract.py $TARGET_MODEL "x`$1" build/roots
+if [ "$2" != "dont-unsquash-the-filesystem" ]; then
     ROOTFSIMAGE=$(ls build/roots/*_rootfs | head -n1); 
     unsquashfs -d rootfs -f $ROOTFSIMAGE;
     APPFSIMAGE=$(ls build/roots/*_app | head -n1);\
