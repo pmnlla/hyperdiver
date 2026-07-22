@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 #MISE description="The big build task (just calls pack.sh)"
+set -euo pipefail
+
 tooling/pack.sh rsup
 uv run tooling/fstable.py build/fsfollow build/update.bin
 uv run tooling/bump.py -f build/update.bin

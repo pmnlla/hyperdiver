@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 #MISE description="Seal a patch."
+set -euo pipefail
+
 QUILT_PATCHSET=$(cat .pc/.hd_patchset)
 if [ "$QUILT_PATCHSET" = "" ]; then
     echo "Error: No patchset specified. Use 'mise run set_patchset [name]' to set the patchset."

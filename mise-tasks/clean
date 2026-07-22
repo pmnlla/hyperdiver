@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 #MISE description="Cleanup! Cleanup! Everybody, do your share!"
+set -euo pipefail
+
 rm -r rootfs/ appfs/ build/ .pc/

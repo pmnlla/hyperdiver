@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 #MISE description="Set the patchset"
+set -euo pipefail
+
 QUILT_PATCHSET=$1
 QUILT_ENV_DIR=.pc
 if [ "$QUILT_PATCHSET" = "" ]; then

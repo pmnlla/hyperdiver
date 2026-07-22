@@ -2,3 +2,6 @@
 coreutils = "latest"
 uv = "latest"
 yq = "latest"
+
+[env]
+PATH = "$(pwd)/.toolchain/targets/arm-hisiv100-linux/bin:$PATH"

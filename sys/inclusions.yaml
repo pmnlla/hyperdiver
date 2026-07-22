@@ -1,5 +1,9 @@
 inclusion: 
-  - src: sys/util/alterna.sh # from project source
+  alterna:
+    src: sys/util/alterna.sh # from project source
     dest: /bin/alterna # in rootfs
-  - src: sys/util/s06tailscale_userspace_tun # from project source
+    type: artifact
+  tailscale_init_script:
+    src: sys/util/s06tailscale_userspace_tun # from project source
     dest: /etc/init.d/S91tailscale_userspace_tun # in rootfs
+    type: artifact

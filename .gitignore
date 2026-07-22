@@ -8,3 +8,4 @@ spam/
 */__pycache__/*
 *~
 LHA*
+.toolchain/*
