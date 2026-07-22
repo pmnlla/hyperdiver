@@ -51,12 +51,6 @@ if [ ! -f "/log/0/.firstboot_complete" ] && [ $1 = "init" ]; then
 
     touch /log/0/.firstboot_complete
     echo "Firstboot setup complete."
-
-    echo " === CityBlock Init"
-    /opt/bin/opkg install tailscale
-    cp /etc/init.d/S91tailscale_userspace_tun /opt/etc/init.d/
-    rm /opt/etc/init.d/S06tailscaled
-    sh /opt/etc/init.d/S91tailscale_userspace_tun start
 elif [ $1 = "init" ]; then
     echo "Password setup..."
     if [ -f "/opt/etc/passwd" ]; then
