@@ -1,0 +1,3 @@
+[submodule "submoodules/curl"]
+	path = submoodules/curl
+	url = https://github.com/curl/curl.git
