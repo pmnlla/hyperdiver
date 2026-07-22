@@ -5,3 +5,5 @@ yq = "latest"
 
 [env]
 PATH = "$(pwd)/.toolchain/targets/arm-hisiv100-linux/bin:$PATH"
+SYSROOT = "$(pwd)/rootfs"
+CC = "$(pwd)/.toolchain/targets/arm-hisiv100-linux/bin/arm-hisiv100-linux-uclibcgnueabi-gcc"
