@@ -1,3 +1,4 @@
 [submodule "submodules/curl"]
 	path = submodules/curl
 	url = https://github.com/curl/curl.git
+	branch = tiny-curl-8_4_0
