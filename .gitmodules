@@ -1,3 +1,6 @@
 [submodule "submodules/curl"]
 	path = submodules/curl
 	url = https://github.com/curl/curl.git
+[submodule "submodules/mbedtls"]
+	path = submodules/mbedtls
+	url = https://github.com/Mbed-TLS/mbedtls
