@@ -2,8 +2,25 @@ inclusion:
   alterna:
     src: sys/util/alterna.sh # from project source
     dest: /bin/alterna # in rootfs
-    type: artifact
   tailscale_init_script:
     src: sys/util/s06tailscale_userspace_tun # from project source
     dest: /etc/init.d/S91tailscale_userspace_tun # in rootfs
-    type: artifact
+  mbedtls:
+    src:
+  libcurl480:
+    src: submodules/curl/lib/.libs/libcurl.so.4.8.0
+    dest: /usr/lib/libcurl.so.4.8.0
+    needs: selfAcquire
+    acquire: "./configure --host=arm-hisiv100-linux-uclibcgnueabi CC='$CC'  LDFLAGS='-L$SYSROOT/lib -L$SYSROOT/usr/lib -Wl,-rpath-link,$SYSROOT/lib -Wl,-rpath-link,$SYSROOT/usr/lib' --without-ssl --without-libpsl  --without-zlib --without-brotli --without-zstd  --without-libidn2 --without-nghttp2 --without-libssh2  --disable-ldap --disable-ldap; make; $TC/arm-hisiv100-linux-uclibcgnueabi-strip -o ./lib/.libs/libcurl.so.4.8.0 ./lib/.libs/libcurl.so.4.8.0"
+  libcurl4:
+    src: submodules/curl/lib/.libs/libcurl.so.4
+    dest: /usr/lib/libcurl.so.4
+    deps: libcurl480
+  libcurl:
+    src: submodules/curl/lib/.libs/libcurl.so
+    dest: /usr/lib/libcurl.so
+    deps: libcurl480
+  curl:
+    src: submodules/curl/src/.libs/curl
+    dest: /usr/bin/curl
+    deps: libcurl480

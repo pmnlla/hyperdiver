@@ -3,7 +3,7 @@
 set -euo pipefail
 
 curl https://github.com/OpenIPC/toolchains/releases/download/v1/arm-hisiv100nptl-linux.tgz -L -o /tmp/hisilicon_toolchain.tgz
-mkdir -P .toolchain/targets
+mkdir -p .toolchain/targets
 tar -xvf /tmp/hisilicon_toolchain.tgz -C .toolchain
 tar -xvf .toolchain/arm-hisiv100nptl-linux/arm-hisiv100-linux.tar.bz2 -C .toolchain/targets
 

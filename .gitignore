@@ -9,3 +9,4 @@ spam/
 *~
 LHA*
 .toolchain/*
+submodules/curl

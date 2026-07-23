@@ -4,6 +4,6 @@ uv = "latest"
 yq = "latest"
 
 [env]
-PATH = "$(pwd)/.toolchain/targets/arm-hisiv100-linux/bin:$PATH"
-SYSROOT = "$(pwd)/rootfs"
-CC = "$(pwd)/.toolchain/targets/arm-hisiv100-linux/bin/arm-hisiv100-linux-uclibcgnueabi-gcc"
+TC = "{{config_root}}/.toolchain/targets/arm-hisiv100-linux/bin"
+SYSROOT = "{{config_root}}/rootfs"
+CC = "{{config_root}}/.toolchain/targets/arm-hisiv100-linux/bin/arm-hisiv100-linux-uclibcgnueabi-gcc"

@@ -22,7 +22,7 @@ prereq() {
 }
 
 include() {
-    yq ".inclusion[] | [.src, .dest] | @tsv " ../sys/inclusions.yaml | while IFS=$'\t' read -r src dest; do
+    yq ".inclusion[] | [.src, .dest, .] | @tsv " ../sys/inclusions.yaml | while IFS=$'\t' read -r src dest; do
         cp ../$src rootfs$dest
         echo "Copied $src to $dest"
     done
